@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lines of Best Fitness</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Lines of Best Fitness">
+  <meta name="author" content="Brian Sipple">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="libraries/widgets/bootstrap/css/bootstrap.css"></link>
+<link rel=stylesheet href="libraries/widgets/quiz/css/demo.css"></link>
+<link rel=stylesheet href="libraries/widgets/interactive/css/aceeditor.css"></link>
+<link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Lines of Best Fitness</h1>
+    <h2>Shiny App for Fitness Metrics</h2>
+    <p>Brian Sipple<br/>Magic</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Background</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>With a large number of the examples in Data Science track focusing on health data and fitness sensor metrics, I chose workout minute loggging as an example for Shiny app development. </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Brief Quiz!</h2>
+  </hgroup>
+  <article data-timings="">
+    
+<div class="quiz quiz-single well ">
+  <p>On average, how many days do you exercise per week?</p>
+
+<ol>
+<li><em>0</em></li>
+<li><em>1</em></li>
+<li><em>2</em></li>
+<li><em>3</em></li>
+<li><em>4</em></li>
+<li><em>5</em></li>
+<li><em>6</em></li>
+<li><em>7</em></li>
+</ol>
+
+  <button class="quiz-submit btn btn-primary">Submit</button>
+  <button class="quiz-toggle-hint btn btn-info">Show Hint</button>
+  <button class="quiz-show-answer btn btn-success">Show Answer</button>
+  <button class="quiz-clear btn btn-danger">Clear</button>
+  
+  <div class="quiz-hint">
+  <p>Be honest!</p>
+
+</div>
+<div class="quiz-explanation">
+  <p>Cool. Any answer was correct. Continue on to see how a basic Shiny App can visualize such data.</p>
+
+</div>
+</div>
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>App Instructions:</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>This app provides a user interface for dynamically logggin and plotting weekly workout minutes. The user can enter the number of minutes they spent exercising during the week as they apply to each category, and instantly see both a barplot (tab 1) and a table (tab 2) that visaulize/summarize the data. </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Example Code - ui.R</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The ui.R code captures User input for different types of workouts as numeric values.</p>
+
+<pre><code class="r"># sidebarLayout(
+#                 sidebarPanel(
+#                         numericInput(&quot;endurance&quot;, label = h4(&quot;Endurance Aerobics&quot;), value = 0, min=0, max=200, step=1),
+#
+#               ....................
+</code></pre>
+
+<pre><code class="r">#                 mainPanel(
+#                         tabsetPanel(type=&quot;tabs&quot;,
+#                                     tabPanel(&quot;Plot&quot;, plotOutput(&quot;plot&quot;)),
+#                                     tabPanel(&quot;Table&quot;, tableOutput(&quot;table&quot;))
+#                         )
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-5" style="background:;">
+  <hgroup>
+    <h2>Example Code - server.R</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>server.R code then captures each value, as it&#39;s updatae, and uses it to form both the bar plot and table. </p>
+
+<pre><code class="r">#   values = reactive({
+#           data.frame(&quot;Endurance&quot; &lt;- input$endurance, 
+#                &quot;Intense Aerobics&quot; &lt;- input$speed, 
+#                 ...............
+</code></pre>
+
+<pre><code class="r">#   labels = c(&quot;Endurance&quot;, &quot;Intense Aerobics&quot;, &quot;Heavy Weight&quot;, &quot;Med Weight&quot;, &quot;Flex&quot;, &quot;Other&quot;)
+#   output$plot = renderPlot({
+#          
+#     barplot(as.numeric(values()[1,]),
+#          main = &#39;Weekly workout minutes, per exercise type&#39;,
+#          names.arg = labels,
+#          cex.names = 0.85,
+#          col=&quot;steelblue&quot;) })
+</code></pre>
+
+<ul>
+<li>These are just snippets of the longer program.</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-6" style="background:;">
+  <hgroup>
+    <h2>Screenshot</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>An example of how the final outcome might appear:</p>
+
+<p><img src="./assets/img/plot.png" /></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Background'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Brief Quiz!'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='App Instructions:'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Example Code - ui.R'>
+         4
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=5 title='Example Code - server.R'>
+         5
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=6 title='Screenshot'>
+         6
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  <script src="libraries/widgets/bootstrap/js/bootstrap.min.js"></script>
+<script src="libraries/widgets/bootstrap/js/bootbox.min.js"></script>
+<script src="libraries/widgets/quiz/js/jquery.quiz.js"></script>
+<script src="libraries/widgets/quiz/js/mustache.min.js"></script>
+<script src="libraries/widgets/quiz/js/quiz-app.js"></script>
+<script src="libraries/widgets/interactive/js/ace/js/ace.js"></script>
+<script src="libraries/widgets/interactive/js/interactive.js"></script>
+
+  <script>  
+  $(function (){ 
+    $("#example").popover(); 
+    $("[rel='tooltip']").tooltip(); 
+  });  
+  </script>  
+  
+  <script src="shared/shiny.js" type="text/javascript"></script>
+  <script src="shared/slider/js/jquery.slider.min.js"></script>
+  <script src="shared/bootstrap/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="shared/slider/css/jquery.slider.min.css"></link>
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>

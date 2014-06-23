@@ -1,0 +1,114 @@
+---
+title       : Lines of Best Fitness
+subtitle    : Shiny App for Fitness Metrics     
+author      : Brian Sipple      
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : [bootstrap, quiz, shiny, interactive]            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+
+---  
+
+## Background
+```{r echo = F, message=FALSE, cache=FALSE}
+opts_chunk$set(results="asis")
+
+```
+
+With a large number of the examples in Data Science track focusing on health data and fitness sensor metrics, I chose workout minute loggging as an example for Shiny app development. 
+
+--- &radio
+
+## Brief Quiz!
+
+On average, how many days do you exercise per week?
+
+1. _0_
+2. _1_
+3. _2_
+4. _3_
+5. _4_
+6. _5_
+7. _6_
+8. _7_
+
+*** .hint 
+Be honest!
+
+***.explanation 
+Cool. Any answer was correct. Continue on to see how a basic Shiny App can visualize such data.
+
+---
+
+## App Instructions: 
+
+This app provides a user interface for dynamically logggin and plotting weekly workout minutes. The user can enter the number of minutes they spent exercising during the week as they apply to each category, and instantly see both a barplot (tab 1) and a table (tab 2) that visaulize/summarize the data. 
+
+---
+
+## Example Code - ui.R
+
+The ui.R code captures User input for different types of workouts as numeric values.
+
+```{r}
+# sidebarLayout(
+#                 sidebarPanel(
+#                         numericInput("endurance", label = h4("Endurance Aerobics"), value = 0, min=0, max=200, step=1),
+#
+#               ....................
+
+```
+
+```{r}
+
+#                 mainPanel(
+#                         tabsetPanel(type="tabs",
+#                                     tabPanel("Plot", plotOutput("plot")),
+#                                     tabPanel("Table", tableOutput("table"))
+#                         )
+
+```
+
+---
+
+## Example Code - server.R
+
+server.R code then captures each value, as it's updatae, and uses it to form both the bar plot and table. 
+
+```{r}
+#   values = reactive({
+#           data.frame("Endurance" <- input$endurance, 
+#                "Intense Aerobics" <- input$speed, 
+#                 ...............
+```
+
+```{r}
+#   labels = c("Endurance", "Intense Aerobics", "Heavy Weight", "Med Weight", "Flex", "Other")
+#   output$plot = renderPlot({
+#          
+#     barplot(as.numeric(values()[1,]),
+#          main = 'Weekly workout minutes, per exercise type',
+#          names.arg = labels,
+#          cex.names = 0.85,
+#          col="steelblue") })
+
+```
+- These are just snippets of the longer program.
+
+--- 
+
+## Screenshot
+
+An example of how the final outcome might appear:
+
+<img src="./assets/img/plot.png" />
+
+
+
+
+
+
+
+
